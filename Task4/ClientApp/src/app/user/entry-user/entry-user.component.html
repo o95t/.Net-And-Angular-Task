@@ -1,0 +1,94 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register-form">
+    <form class="form" [formGroup]="entryForm">
+        <div class="note">
+            <p>Entry User.</p>
+        </div>
+        <div class="form-content">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="userName" placeholder="User Name *"
+                            value="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="name" placeholder="Full Name *"
+                            value="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="password" class="form-control" formControlName="password" placeholder="Password *"
+                            value="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <input type="password" (change)="matchValidator()" class="form-control"
+                            formControlName="confirmPassword" placeholder="Confirm Password *" value="" />
+                        <span *ngIf="notSame" style="font-size: 12px; color: red;">password not match</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" formControlName="email" placeholder="Email *"
+                            value="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="mobile" placeholder="Mobile *"
+                            value="" />
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btnSubmit" (click)="Save()" style="margin-right: 10px;">Save</button>
+            <button type="button" class="btnSubmit" (click)="Cancel()" style="background-color: rgb(243, 81, 81);">Cancel</button>
+        </div>
+    </form>
+
+    <div *ngIf="entryForm.invalid && clickedSubmit" class="alert">
+
+        <div style="color: red;" *ngIf="entryForm.controls.userName.invalid">
+            User Name is required.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.name.invalid">
+            Full Name is required.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.password.invalid">
+            Password is required.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.confirmPassword.invalid">
+            Confirm Password is required.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.email.value == ''">
+            Email is required.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.mobile.value == ''">
+            mobile is required.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.email.invalid">
+            Please write correct email.
+        </div>
+        <div style="color: red;" *ngIf="entryForm.controls.mobile.invalid">
+            Please write correct mobile.
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<!--Bootsrap 4 CDN-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<!--Fontawesome CDN-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+<h2>My Users</h2>
+
+<table class="table">
+  <thead style="background:  -webkit-linear-gradient(left, #000000, #8811c5) !important;">
+    <tr style="color: rgb(252, 252, 252);">
+      <th scope="col">#</th>
+      <th scope="col" (click)="sortList()">User Name &#xf07d;
+      </th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile</th>
+      <th scope="col"><button type="button" (click)="edit(0)" style="margin-right: 10px;" class="btn btn-success">Add
+          New</button>
+        <button type="button" (click)="Logout()" class="btn btn-danger">Logout</button>
+      </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of Users | slice: (page-1) * pageSize : page * pageSize">
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.userName}}</td>
+      <td>{{user.fullName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.mobile}}</td>
+      <td style="width: 15%;"><button type="button" (click)="edit(user.id)" style="margin-right: 10px;"
+          class="btn btn-warning">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="delete(user.userName, user.id)">Delete</button>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<div class="row" style="text-align: center !important;">
+  <div class="col-md-5"></div>
+  <div class="col-md-2">
+    <div class="pagination" style="text-align: center;">
+      <a (click)="back()" [ngClass]="{'isDisabled': page === 1}" class="previous round">&#8249;</a>
+
+        <p *ngFor="let in of counter(countPage) ;let i = index ">
+          <a class="pagination" [ngClass]="{'isDisabled': page === i+1}" (click)="setPage(i+1);" >{{i+1}}</a>
+        </p>
+
+      <a (click)="next()" [ngClass]="{'isDisabled': page >= countPage}"  class="next round">&#8250;</a>
+    </div>
+  </div>
+  <div class="col-md-5"></div>
+</div>
